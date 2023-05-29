@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>Task App</title>
 </head>
 <body>
@@ -16,7 +17,14 @@
     </form>
     <ul>
         {% for t in tasks %}
-        <li>{{ t.content }}</li>
+        
+        <li>
+            <span class="{% if t.completed %} done {% endif %}">
+            {{ t.content }}
+            </span> 
+        </li>
+        <a href="/delete/{{ t.id }}">Delete</a>
+        <a href="/completed/{{ t.id }}">Update</a>
         {% endfor %}
     </ul>
 </body>

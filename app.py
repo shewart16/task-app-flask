@@ -30,5 +30,20 @@ def new():
     return redirect("/")
 
 
+@app.route("/delete/<int:id>")
+def delete(id):
+    task = Task.query.filter_by(id=int(id)).delete()
+    db.session.commit()
+    return redirect("/")
+
+
+@app.route("/completed/<int:id>")
+def completed(id):
+    task = Task.query.filter_by(id=int(id)).first()
+    task.completed = not (task.completed)
+    db.session.commit()
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
